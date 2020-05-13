@@ -1,0 +1,21 @@
+import numpy as np
+
+
+class NearestNeighbor:
+    def __init__(self):
+        pass
+
+    def train(self, x, y):
+        self.Xtr = x
+        self.ytr = y
+
+    def predict(self, x):
+        num_test = x.shape[0]
+        y_predict = np.zeros(num_test, dtype=self.ytr.dtype)
+
+        for i in range(num_test):
+            distances = np.sum(np.abs(self.Xtr - x[i, :]), axis=1)
+            min_index = np.argmin(distances)
+            y_predict[i] = self.ytr[min_index]
+
+            return y_predict
